@@ -68,6 +68,7 @@ namespace mylib {
 
 	char* get_word(char* text, int* iterator) {
 		char* s = (char*)malloc(sizeof(char));
+		char* tmp;
 		int capacity = 1;
 		int i = 0;
 		while (text[*iterator] != 0 && !isalpha(text[(*iterator)]))
@@ -76,14 +77,24 @@ namespace mylib {
 		}
 		while (text[*iterator] != 0 && isalpha(text[*iterator]))
 		{
-			s[i++] = text[*iterator];
+			if (s)
+			{
+				s[i++] = text[*iterator];
+			}
 			if (i >= capacity) {
 				capacity *= 2;
-				s = (char*)realloc(s, capacity * sizeof(char));
+				tmp = (char*)realloc(s, capacity * sizeof(char));
+				if (tmp != NULL)
+				{
+					s = tmp;
+				}
 			}
 			(*iterator)++;
 		}
-		s[i] = '\0';
+		if (s)
+		{
+			s[i] = '\0';
+		}
 		return s;
 	}
 
@@ -95,7 +106,10 @@ namespace mylib {
 		//mass[0] = get_word(text, &it);
 		for (int i = 0; i <= *len; i++)
 		{
-			mass[i] = get_word(text, &it);
+			if (mass)
+			{
+				mass[i] = get_word(text, &it);
+			}
 		}
 		return mass;
 	}

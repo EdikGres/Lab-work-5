@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LibForLab.h"
+/*
+	блок выделения памяти в функцию.
+	вывести слова меньше данного, если случаются повторы (SET);
+	
 
+
+*/
 using namespace mylib;
 int main() {
 	printf("Input your text: ");
