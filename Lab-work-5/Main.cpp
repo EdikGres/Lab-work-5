@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "LibForLab.h"
 /*
-	блок выделения памяти в функцию.
-	вывести слова меньше данного, если случаются повторы (SET);
+	блок выделения памяти в функцию. (ok)
+	вывести слова меньше данного, если случаются повторы (SET) (ok)
 	
 
 
@@ -13,14 +13,11 @@ int main() {
 	printf("Input your text: ");
 	int len_text = 0;
 	char* text = get_string(&len_text);
-
 	printf("Input your word: ");
 	int len_word = 0;
 	char* word = get_string(&len_word);
-
 	int i = 0;
 	word = get_word(word, &i);
-
 	int len_mass = 0;
 	char** mass = get_words(text, &len_mass);
 	printf("\nYour word: %s\nAll words from text: ", word);
@@ -36,13 +33,20 @@ int main() {
 			printf("%s ", mass[i]);
 		}
 	}
+	int len_set = 0;
+	char** set_words = get_set_words(mass, len_mass, &len_set);
+	printf("\n\nSET words: ");
+	for (int  i = 0; i < len_set; i++)
+	{
+		printf("%s ", set_words[i]);
+	}
 
+	free(set_words);
 	free(text);
 	free(word);
 	for (int i = len_mass; i >= 0; i--)
 	{
 		free(mass[i]);
 	}
-	
 	return 0;
 }
