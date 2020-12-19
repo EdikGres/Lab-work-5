@@ -120,7 +120,6 @@ namespace mylib {
 				return 1;
 			}
 			i++;
-
 		}
 		return 0;
 	}
@@ -139,13 +138,4 @@ namespace mylib {
 		*len_set = j;
 		return set_words;
 	}
-	
-	
-
-
-	
-	
-
-
-
 }
