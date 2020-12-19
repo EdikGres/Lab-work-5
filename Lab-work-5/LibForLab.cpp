@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include "LibForLab.h"
@@ -33,6 +34,17 @@ namespace mylib {
 			s[*len] = 0;
 		}
 		return s;
+	}
+	int get_integer(const char* msg) {
+		char answer[256];
+		int n;
+		printf("%s", msg);
+		fgets(answer, sizeof(answer), stdin);
+		while (sscanf(answer, "%d", &n) != 1) {
+			printf("Incorrect input. Try again: ");
+			fgets(answer, sizeof(answer), stdin);
+		}
+		return n;
 	}
 	int isalpha(char ch) {
 		if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
@@ -126,6 +138,10 @@ namespace mylib {
 	char** get_set_words(char** text, int len_text, int* len_set) {
 		int i = 0, j = 0;
 		char** set_words = (char**)malloc(sizeof(char**) * len_text);
+		if (set_words == NULL)
+		{
+			return NULL;
+		}
 		set_words[j++] = text[i++];
 		while (i < len_text)
 		{
@@ -137,5 +153,27 @@ namespace mylib {
 		}
 		*len_set = j;
 		return set_words;
+	}
+	int my_len_text(char* text) {
+		int counter = 0;
+		while (text[counter] != 0)
+		{
+			counter++;
+		}
+		return counter;
+	}
+	char** get_words_less(char** mass, char* word, int len_words, int* len) {
+		int i = 0, j = 0;
+		char** words_less = (char**)malloc(sizeof(char**) * len_words);
+		while (i < len_words)
+		{
+			if (my_strcmp(mass[i], word) == (-1))
+			{
+				words_less[j++] = mass[i];
+			}
+			i++;
+		}
+		*len = j;
+		return words_less;
 	}
 }
