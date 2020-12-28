@@ -176,4 +176,28 @@ namespace mylib {
 		*len = j;
 		return words_less;
 	}
+
+	char* get_text(FILE* file) {
+		unsigned int N = 10, delta = 10, i = 0;
+		char* text = (char*)malloc(sizeof(char) * N);
+		if (text == NULL)
+		{
+			return NULL;
+		}
+		while ((text[i] = fgetc(file)) != EOF) {
+			if (++i >= N) {
+				N += delta;
+				text = (char*)realloc(text, sizeof(char) * N);
+				if (text == NULL)
+				{
+					return NULL;
+				}
+			}
+		}
+		//fclose(file);
+		text[i] = '\0';
+		return text;
+	}
+	
+	
 }

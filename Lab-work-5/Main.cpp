@@ -4,24 +4,45 @@
 #include "LibForLab.h"
 /*
 	блок выделения памяти в функцию. (ok)
+	ДОП:
 	вывести слова меньше данного, если случаются повторы (SET) (ok)
-
+	Доп к допу:
 	просим длину и в результате попадают SET слова меньше или равно длины
+
+	Чтение входных данных из файла.
 
 
 */
 using namespace mylib;
 int main() {
-	printf("Input your text: ");
+	FILE* file = fopen("test.txt", "r");
+	char* text = get_text(file);
+	fclose(file);
 	int len_text = 0;
-	char* text = get_string(&len_text);
+	while (text[len_text] != 0)
+	{
+		len_text++;
+	}
+	printf("Your file: %s\n", text);
 	if (len_text == 0)
 	{
 		exit(1);
 	}
-	printf("Input your word: ");
+	//printf("Input your word: ");
 	int len_word = 0;
-	char* word = get_string(&len_word);
+	char* word =(char*)malloc(50);
+	int j = 0;
+	char* ptr = text;
+	while (ptr[j] != '\n')
+	{
+		j++;
+	}
+	j++;
+	
+	word = get_word(ptr, &len_word);
+	
+	//int i = 0;
+	printf("%s", word);
 	if (len_word == 0 || word == 0)
 	{
 		exit(2);
