@@ -176,28 +176,46 @@ namespace mylib {
 		*len = j;
 		return words_less;
 	}
-
-	char* get_text(FILE* file) {
-		unsigned int N = 10, delta = 10, i = 0;
-		char* text = (char*)malloc(sizeof(char) * N);
-		if (text == NULL)
+	//сделать va_args, чтобы примен€ть форматный ввод строк
+	char* fget_string(FILE* file, int* len) {
+		if (feof(file) && !ferror(file))
 		{
 			return NULL;
 		}
-		while ((text[i] = fgetc(file)) != EOF) {
-			if (++i >= N) {
-				N += delta;
-				text = (char*)realloc(text, sizeof(char) * N);
-				if (text == NULL)
-				{
-					return NULL;
-				}
+		*len = 0;
+		int capacity = 1;
+		char* s = (char*)malloc(sizeof(char));
+		char c = fgetc(file);
+		while (c != '\n' && s != NULL && !feof(file))
+		{
+			s[(*len)++] = c;
+			if (s != NULL && *len >= capacity) {
+				s = (char*)get_memory(s, &capacity, sizeof(char*));
 			}
+			c = fgetc(file);
 		}
-		//fclose(file);
-		text[i] = '\0';
-		return text;
+		if (s != NULL)
+		{
+			s[*len] = 0;
+		}
+		return s;
 	}
-	
+	int isNumber(char ch) {
+		return (ch >= '0' && ch <= '9');
+	}
+	int makeInteger(const char* c) {
+		int value = 0;
+		int sign = 1;
+		if (*c == '+' || *c == '-') {
+			if (*c == '-') sign = -1;
+			c++;
+		}
+		while (isNumber(*c)) {
+			value *= 10;
+			value += (int)(*c - '0');
+			c++;
+		}
+		return value * sign;
+	}
 	
 }

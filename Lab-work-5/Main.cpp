@@ -15,38 +15,41 @@
 */
 using namespace mylib;
 int main() {
-	FILE* file = fopen("test.txt", "r");
-	char* text = get_text(file);
-	fclose(file);
-	int len_text = 0;
-	while (text[len_text] != 0)
+	FILE* input = fopen("input.txt", "rt");
+	if (input == NULL)
 	{
-		len_text++;
-	}
-	printf("Your file: %s\n", text);
-	if (len_text == 0)
-	{
+		FILE* input2 = fopen("input.txt", "wt");
+		if (input2 == NULL)
+		{
+			printf("ERROR! We can't open the file!");
+			exit(5);
+		}
+		fprintf(input2, "text=\nword=\nmax_len=");
+		printf("File input.txt was not found.\nAn empty file has been created, please fill it in.\nAnd then run the program again.");
+		fclose(input2);
 		exit(1);
 	}
-	//printf("Input your word: ");
-	int len_word = 0;
-	char* word =(char*)malloc(50);
-	int j = 0;
-	char* ptr = text;
-	while (ptr[j] != '\n')
-	{
-		j++;
-	}
-	j++;
-	
-	word = get_word(ptr, &len_word);
-	
-	//int i = 0;
-	printf("%s", word);
-	if (len_word == 0 || word == 0)
+	int len_text = 0;
+	//printf("Input text: ");
+	//char* text = get_string(&len_text);
+	fseek(input, 5, SEEK_CUR);
+	char* text = fget_string(input, &len_text);
+	printf("Your text: %s\n", text);
+	if (len_text == 0)
 	{
 		exit(2);
 	}
+
+	//printf("Input your word: ");
+	int len_word = 0;
+	//char* word = get_string(&len_word);
+	fseek(input, 5, SEEK_CUR);
+	char* word = fget_string(input, &len_word);
+	if (len_word == 0 || word == 0)
+	{
+		exit(3);
+	}
+
 	int i = 0;
 	word = get_word(word, &i);
 	int len_mass = 0;
@@ -56,7 +59,7 @@ int main() {
 	{
 		printf("%s ", mass[i]);
 	}
-	printf("\n\nResult: ");
+	printf("\n\nResult(<%s): ", word);
 	int len_words_less = 0;
 	char** words_less = get_words_less(mass, word, len_mass, &len_words_less);
 	for (int i = 0; i < len_words_less; i++)
@@ -71,7 +74,12 @@ int main() {
 		printf("%s ", set_words[i]);
 	}
 	//------
-	int len = get_integer("\n\nInput max lenght: ");
+	//int len = get_integer("\n\nInput max lenght: ");
+	int len = 0;
+	fseek(input, 8, SEEK_CUR);
+	char* str_len = fget_string(input, &len);
+	len = makeInteger(str_len);
+	printf("\n\nMax lenght: %d\n", len);
 	printf("Result: ");
 	for (int i = 0; i < len_set; i++)
 	{
@@ -81,7 +89,7 @@ int main() {
 		}
 	}
 	//------
-
+	fclose(input);
 	free(set_words);
 	free(text);
 	free(word);

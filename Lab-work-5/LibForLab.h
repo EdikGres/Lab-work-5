@@ -15,7 +15,9 @@ namespace mylib {
 	char** get_set_words(char** text, int len_text, int* len_set);
 	int my_len_text(char* text);
 	char** get_words_less(char** mass, char* word, int len_words, int* len);
-	char* get_text(FILE* file);
+	char* fget_string(FILE* file, int* len);
+	int isNumber(char ch);
+	int makeInteger(const char* c);
 }
 
 #endif
