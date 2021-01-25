@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="LibForLab.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RBTreeLib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LibForLab.h" />
+    <ClInclude Include="RBTreeLib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

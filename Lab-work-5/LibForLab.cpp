@@ -111,7 +111,7 @@ namespace mylib {
 	}
 	char** get_words(char* text, int* len) {
 		*len = number_words(text);
-		char** mass = (char**)malloc(sizeof(char**) * (*len));
+		char** mass = (char**)malloc(sizeof(char*) * (*len));
 		int it = 0;
 		//mass[0] = get_word(text, &it);
 		for (int i = 0; i <= *len; i++)

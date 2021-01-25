@@ -21,9 +21,15 @@
     <ClCompile Include="LibForLab.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="RBTreeLib.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LibForLab.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="RBTreeLib.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

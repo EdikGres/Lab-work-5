@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "../Lab-work-5/LibForLab.h"
-
+#include "../Lab-work-5/RBTreeLib.h"
 TEST(TestCaseName, TestName) {
 	EXPECT_EQ(1, 1);
 	EXPECT_TRUE(true);
@@ -16,20 +16,15 @@ TEST(LibForLab, number_words_tests) {
 
 	ASSERT_EQ(number_words(text2), 6);
 }
-TEST(LibForLab, uniqueWords) {
+TEST(LibForLab, mystrcmp) {
+	char a[] = { "edik" };
+	char b[] = { "lol" };
+	char c[] = { "edik" };
 
-	char t1[] = "abcd";
-	char t2[] = "abcd";
-	char t3[] = "bitch";
-
-	char** mass = (char**)malloc(sizeof(char**) * 5);
-	for (int i = 0; i < 5; i++)
-	{
-		mass[i] = t1;
-	}
-	mass[2] == NULL;
-	mass[3] == NULL;
-	ASSERT_EQ(uniqueWord(mass, 3, t3), 1);
-
+	ASSERT_EQ(my_strcmp(b, a), 1);
+	ASSERT_EQ(my_strcmp(a, c), 0);
 
 }
+//using namespace tree;
+
+
